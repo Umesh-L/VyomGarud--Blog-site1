@@ -1,0 +1,33 @@
+Reminder: Install a Mermaid preview extension in VS Code to visualize this diagram.
+
+## Architecture & Data Flow
+- NextJS Frontend (App Router) renders the UI, handles routing/search, and fetches content via HTTP requests to Strapi.
+- StrapiCMS Backend (Node.js) exposes REST endpoints, applies auth/validation, and persists structured content in the configured SQL database (SQLite by default, Postgres/MySQL optional per `.env`).
+- Media uploads and generated assets are served directly by Strapi through its `/uploads` pipeline, keeping the frontend stateless.
+
+```mermaid
+graph TD
+%% Services
+svcnextjsfrontend["`NextJS Frontend
+Path: NextJS--Frontend
+Language: TypeScript
+Port: 3000`"]
+svcstrapibackend["`StrapiCMS Backend
+Path: StrapiCMS(NodeJS)--Backend
+Language: Node.js
+Port: 1337`"]
+subgraph "Application Tier"
+nextjsfrontend("`NextJS Frontend (Next.js App Router)`")
+strapibackend("`StrapiCMS Backend (Node.js)`")
+end
+subgraph "Data Tier"
+sqldb("`SQL Database (SQLite/ Postgres/ MySQL via Strapi config)`")
+uploadsfolder("`Media Uploads (Strapi public/uploads)`")
+end
+%% Relationships
+svcnextjsfrontend --> |"hosted as web client"| nextjsfrontend
+nextjsfrontend -.-> |"REST/GraphQL fetch"| strapibackend
+svcstrapibackend --> |"hosted as API"| strapibackend
+strapibackend -.-> |"Knex ORM"| sqldb
+strapibackend -.-> |"Static file serve"| uploadsfolder
+```

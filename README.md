@@ -6,6 +6,13 @@ Full-stack blogging platform for the VyomGarud UAV/drone program. The Next.js 16
 
 </div>
 
+## 🎥 Screen Recording
+1) Output preview : <br/>
+https://github.com/user-attachments/assets/f911cb0f-6184-4d44-a585-57c69bfab7b4
+<br/>
+2) Project code preview : <br/>
+https://github.com/user-attachments/assets/183d3914-c51e-4f80-a6e6-c91809b3e37a
+
 ## 🧱 Architecture Snapshot
 
 - **NextJS--Frontend/** → Next.js App Router (TypeScript, Tailwind CSS 4, React 19). Fetches content via `lib/strapi.ts` and renders hero sections, featured missions, taxonomy chips, search, modals, and single-post pages.
